@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="tabs my-2">
+    <ul class="nav nav-pills" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active text-white"
+          id="team1-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#team1"
+          type="button"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+        >
+          Team 1
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link text-white"
+          id="team2-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#team2"
+          type="button"
+          role="tab"
+          aria-selected="true"
+        >
+          Team 2
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div
+      class="tab-pane active text-white"
+      id="team1"
+      role="tabpanel"
+      tabindex="0"
+    >
+      <div class="card">
+        <div class="card-body text-dark">
+          <h3 class="card-title">Team 1</h3>
+          <h6 class="">Players</h6>
+          <ul class="list-group list-group-flush">
+            {% for player in match.team1.players.all %}
+            <li class="list-group-item d-flex justify-content-between">
+                <div class="player-name">{{player.name}}</div>
+                {% for score in match.match_scores.all %}
+                {% if player == score.player %}
+                <div class="player-score">{{score.score}}</div>
+                {% endif %}
+                {% endfor %}
+                <form class="row" action="{% url 'update_score' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="col-auto" style="width: 100px;">
+                    <input type="hidden" name="match" value="{{match.id}}" class="form-control">
+                    <input type="hidden" name="player" value="{{player.id}}" class="form-control">
+                    {% comment %} <input type="hidden" name="score_id" value="{{player.id}}" class="form-control"> {% endcomment %}
+                    <input type="number" name="score" class="form-control">
+                  </div>
+                  <div class="col-auto" style="width: 100px;">
+                    <button type="submit" class="btn btn-primary ">Add</button>
+                  </div>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane text-white" id="team2" role="tabpanel" tabindex="0">
+      <div class="card">
+        <div class="card-body text-dark">
+          <h3 class="card-title">Team 2</h3>
+          <h6 class="">Players</h6>
+          <ul class="list-group list-group-flush">
+            {% for player in match.team2.players.all %}
+            <li class="list-group-item d-flex justify-content-between">
+                <div class="player-name">{{player.name}}</div>
+                {% for score in match.match_scores.all %}
+                {% if player == score.player %}
+                <div class="player-score">{{score.score}}</div>
+                {% endif %}
+                
+                {% endfor %}
+                <form class="row" action="{% url 'update_score' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="col-auto" style="width: 100px;">
+                    <input type="hidden" name="match" value="{{match.id}}" class="form-control">
+                    <input type="hidden" name="player" value="{{player.id}}" class="form-control">
+                    <input type="number" name="score" class="form-control">
+                  </div>
+                  <div class="col-auto" style="width: 100px;">
+                    <button type="submit" class="btn btn-primary ">Add</button>
+                  </div>
+                </form>
+            </li>
+            
+        {% endfor %}
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-3 mt-5 order-1 order-md-0">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">
+                  <h4 class="text-center">{{match.team1.name}}</h4>
+                  <div class="team_one_logo">
+                    <img
+                      src="{{match.team1.thumbnail.url}}"
+                      alt=""
+                      class="img-fluid rounded"
+                    />
+                  </div>
+                </div>
+                <h6 class="">Players </h6>
+
+                <ul class="list-group list-group-flush">
+                    {% for player in match.team1.players.all %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div class="player-name">{{player.name}}</div>
+                            {% for score in match.match_scores.all %}
+                                {% if player == score.player %}
+                                    <div class="player-score">{{score.score}}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mt-5 order-0 order-md-1">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="h6 text-center">Team 1 V/S Team 2</h6>
+
+                <hr />
+                <div
+                  class="team-info-container d-flex justify-content-around align-content-between"
+                >
+                  <div class="team-one-container">
+                    <img
+                      src="https://images.pexels.com/photos/3657154/pexels-photo-3657154.jpeg"
+                      alt=""
+                      style="height: 150px; width: 150px; object-fit: cover"
+                      class="img-fluid rounded-circle img-thumbnail"
+                    />
+                    <h6 class="text-center my-2">{{match.team1.name}}</h6>
+                    <h6 class="text-center my-2">Score:{{match.get_team1_score}}</h6>
+                  </div>
+                  
+                  <div class="team-two-container">
+                    <img
+                      src="https://images.pexels.com/photos/3657154/pexels-photo-3657154.jpeg"
+                      alt=""
+                      style="height: 150px; width: 150px; object-fit: cover"
+                      class="img-fluid rounded-circle img-thumbnail"
+                    />
+                
+                    <h6 class="text-center my-2">{{match.team2.name}}</h6>
+                    <h6 class="text-center my-2">Score: {{match.get_team2_score}}</h6>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 my-5 order-2 order-md-2">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">
+                  <h4 class="text-center">{{match.team2.name}}</h4>
+                  <div class="team_one_logo">
+                    <img
+                      src="https://images.pexels.com/photos/3657154/pexels-photo-3657154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      alt=""
+                      class="img-fluid rounded"
+                    />
+                  </div>
+                </div>
+                <h6 class="">Players</h6>
+
+                <ul class="list-group list-group-flush">
+                    {% for player in match.team2.players.all %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <div class="player-name">{{player.name}}</div>
+                        {% for score in match.match_scores.all %}
+                        {% if player == score.player %}
+                        <div class="player-score">{{score.score}}</div>
+                        {% endif %}
+                        
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+

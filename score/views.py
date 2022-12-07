@@ -17,9 +17,15 @@ def update_score(request):
     if request.method == "POST":
         match_id = request.POST["match"]
         player_id = request.POST["player"]
+        match = Match.objects.get(id=match_id)
+        player = Player.objects.get(id=player_id)
         score = request.POST["score"]
-        obj, created = Score.objects.get_or_create(match=match_id, player=player_id)
-        obj.score = obj.score + int(score)
+        obj, created = Score.objects.get_or_create(
+            match=match,
+            player=player,
+        )
+
+        obj.score += int(score)
         obj.save()
         return redirect("update_score")
     return render(request, "update_score.html", context)

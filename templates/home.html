@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-{% block content %}
 {% block title %}Score Board{% endblock title %}
+{% block content %}
+
 <div class="container">
     <div class="row">
       <div class="col-md-3 mt-5 order-1 order-md-0">
@@ -50,7 +51,7 @@
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <h6 class="h6 text-center">Team 1 V/S Team 2</h6>
+                <h6 class="h6 text-center">{{match.team1.name}} V/S {{match.team2.name}}</h6>
 
                 <hr />
                 <div
@@ -114,7 +115,7 @@
                       />
                           <div class="player-name">{{player.name}}</div>
                        </div>
-                        <div class="player-name">{{player.name}}</div>
+                        
                         {% for score in match.match_scores.all %}
                         {% if player == score.player %}
                         <div class="player-score">{{score.score}}</div>

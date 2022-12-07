@@ -4,7 +4,6 @@ from django.db import models
 class Team(models.Model):
     name = models.CharField(max_length=200)
     thumbnail = models.ImageField(upload_to="team/thumbnail/%Y/")
-    country = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
@@ -13,7 +12,6 @@ class Team(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to="player/%Y/%m/")
-    life_time_score = models.IntegerField()
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="players")
 
     def __str__(self):
@@ -55,7 +53,7 @@ class Score(models.Model):
     player = models.ForeignKey(
         Player, on_delete=models.CASCADE, related_name="match_players"
     )
-    score = models.IntegerField()
+    score = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.player}--{self.score}--{self.match}"

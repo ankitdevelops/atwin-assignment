@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block content %}
-{% block title %}Update Score{% endblock title %}
+{% extends 'base.html' %} {% block title %}Update Score{% endblock title %} {% block content %}
+
 <div class="container">
   <div class="tabs my-2">
     <ul class="nav nav-pills" id="myTab" role="tablist">
@@ -43,12 +43,21 @@
     >
       <div class="card">
         <div class="card-body text-dark">
-          <h3 class="card-title">Team 1</h3>
+          <h3 class="card-title">{{match.team1.name}}</h3>
           <h6 class="">Players</h6>
           <ul class="list-group list-group-flush">
             {% for player in match.team1.players.all %}
             <li class="list-group-item d-flex justify-content-between">
-                <div class="player-name">{{player.name}}</div>
+                
+                <div class="d-flex align-items-center">
+                  <img
+                  src="{{player.image.url}}"
+                  alt="{{player.name}}"
+                  class="img-fluid rounded-circle me-2"
+                  style="width: 40px;height:40px"
+                />
+                    <div class="player-name">{{player.name}}</div>
+                 </div>
                 {% for score in match.match_scores.all %}
                 {% if player == score.player %}
                 <div class="player-score">{{score.score}}</div>
@@ -75,12 +84,20 @@
     <div class="tab-pane text-white" id="team2" role="tabpanel" tabindex="0">
       <div class="card">
         <div class="card-body text-dark">
-          <h3 class="card-title">Team 2</h3>
+          <h3 class="card-title">{{match.team2.name}}</h3>
           <h6 class="">Players</h6>
           <ul class="list-group list-group-flush">
             {% for player in match.team2.players.all %}
             <li class="list-group-item d-flex justify-content-between">
-                <div class="player-name">{{player.name}}</div>
+              <div class="d-flex align-items-center">
+                <img
+                src="{{player.image.url}}"
+                alt="{{player.name}}"
+                class="img-fluid rounded-circle me-2"
+                style="width: 40px;height:40px"
+              />
+                  <div class="player-name">{{player.name}}</div>
+               </div>
                 {% for score in match.match_scores.all %}
                 {% if player == score.player %}
                 <div class="player-score">{{score.score}}</div>

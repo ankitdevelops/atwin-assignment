@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% block title %}Score Board{% endblock title %}
 <div class="container">
     <div class="row">
       <div class="col-md-3 mt-5 order-1 order-md-0">
@@ -12,7 +13,7 @@
                   <div class="team_one_logo">
                     <img
                       src="{{match.team1.thumbnail.url}}"
-                      alt=""
+                      alt="team-1-logo"
                       class="img-fluid rounded"
                     />
                   </div>
@@ -22,7 +23,15 @@
                 <ul class="list-group list-group-flush">
                     {% for player in match.team1.players.all %}
                         <li class="list-group-item d-flex justify-content-between">
+                         <div class="d-flex align-items-center">
+                          <img
+                          src="{{player.image.url}}"
+                          alt="{{player.name}}"
+                          class="img-fluid rounded-circle me-2"
+                          style="width: 40px;height:40px"
+                        />
                             <div class="player-name">{{player.name}}</div>
+                         </div>
                             {% for score in match.match_scores.all %}
                                 {% if player == score.player %}
                                     <div class="player-score">{{score.score}}</div>
@@ -49,8 +58,8 @@
                 >
                   <div class="team-one-container">
                     <img
-                      src="https://images.pexels.com/photos/3657154/pexels-photo-3657154.jpeg"
-                      alt=""
+                      src="{{match.team1.thumbnail.url}}"
+                      alt="team-logo"
                       style="height: 150px; width: 150px; object-fit: cover"
                       class="img-fluid rounded-circle img-thumbnail"
                     />
@@ -60,12 +69,12 @@
                   
                   <div class="team-two-container">
                     <img
-                      src="https://images.pexels.com/photos/3657154/pexels-photo-3657154.jpeg"
-                      alt=""
+                      src="{{match.team2.thumbnail.url}}"
+                      alt="team-logo"
                       style="height: 150px; width: 150px; object-fit: cover"
                       class="img-fluid rounded-circle img-thumbnail"
                     />
-                
+                    
                     <h6 class="text-center my-2">{{match.team2.name}}</h6>
                     <h6 class="text-center my-2">Score: {{match.get_team2_score}}</h6>
                    
@@ -85,8 +94,8 @@
                   <h4 class="text-center">{{match.team2.name}}</h4>
                   <div class="team_one_logo">
                     <img
-                      src="https://images.pexels.com/photos/3657154/pexels-photo-3657154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
+                      src="{{match.team2.thumbnail.url}}"
+                      alt="team-logo"
                       class="img-fluid rounded"
                     />
                   </div>
@@ -96,6 +105,15 @@
                 <ul class="list-group list-group-flush">
                     {% for player in match.team2.players.all %}
                     <li class="list-group-item d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <img
+                        src="{{player.image.url}}"
+                        alt="{{player.name}}"
+                        class="img-fluid rounded-circle me-2"
+                        style="width: 40px;height:40px"
+                      />
+                          <div class="player-name">{{player.name}}</div>
+                       </div>
                         <div class="player-name">{{player.name}}</div>
                         {% for score in match.match_scores.all %}
                         {% if player == score.player %}

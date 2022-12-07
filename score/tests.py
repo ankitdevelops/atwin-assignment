@@ -16,7 +16,6 @@ class TeamTests(TestCase):
             thumbnail=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            country="country",
         )
 
     def test_team_model(self):
@@ -25,7 +24,6 @@ class TeamTests(TestCase):
             self.team.thumbnail.read(),
             open("test_img.png", "rb").read(),
         )
-        self.assertEqual(self.team.country, "country")
         self.assertEqual(str(self.team), "team1")
 
 
@@ -41,7 +39,6 @@ class PlayerTests(TestCase):
             thumbnail=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            country="country",
         )
 
         cls.player = Player.objects.create(
@@ -49,7 +46,6 @@ class PlayerTests(TestCase):
             image=SimpleUploadedFile(
                 cls.image2.name, cls.image2.read(), content_type="image/jpeg"
             ),
-            life_time_score=235,
             team=cls.team,
         )
 
@@ -59,7 +55,7 @@ class PlayerTests(TestCase):
             self.player.image.read(),
             open("test_img.png", "rb").read(),
         )
-        self.assertEqual(self.player.life_time_score, 235)
+
         self.assertEqual(self.player.team, self.team)
         self.assertEqual(self.player.team.name, "team1")
 
@@ -76,7 +72,6 @@ class MatchTests(TestCase):
             thumbnail=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            country="country",
         )
 
         cls.team2 = Team.objects.create(
@@ -84,7 +79,6 @@ class MatchTests(TestCase):
             thumbnail=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            country="country2",
         )
 
         cls.match = Match.objects.create(
@@ -135,7 +129,6 @@ class ScoreTests(TestCase):
             thumbnail=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            country="country",
         )
 
         cls.team2 = Team.objects.create(
@@ -143,7 +136,6 @@ class ScoreTests(TestCase):
             thumbnail=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            country="country2",
         )
 
         cls.match = Match.objects.create(
@@ -158,7 +150,6 @@ class ScoreTests(TestCase):
             image=SimpleUploadedFile(
                 cls.image.name, cls.image.read(), content_type="image/jpeg"
             ),
-            life_time_score=235,
             team=cls.team1,
         )
 

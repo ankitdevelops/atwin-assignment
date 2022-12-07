@@ -6,9 +6,7 @@ from .forms import *
 
 
 def home(request):
-    team = Team.objects.all()
     match = Match.objects.first()
-    # print(match.match_scores.all().filter(player=match.team1.players.all().val))
     context = {"match": match}
     return render(request, "home.html", context)
 
@@ -21,7 +19,6 @@ def update_score(request):
         player_id = request.POST["player"]
         score = request.POST["score"]
         obj, created = Score.objects.get_or_create(match=match_id, player=player_id)
-        print(obj.score)
         obj.score = obj.score + int(score)
         obj.save()
         return redirect("update_score")
